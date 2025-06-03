@@ -1,8 +1,7 @@
 package login;
 
 /**
- * Representa um usuário com login e senha.
- * Armazena os dados fornecidos no cadastro.
+ * Modelo simples de usuário com login e senha.
  */
 public class Usuario {
     private String login;
