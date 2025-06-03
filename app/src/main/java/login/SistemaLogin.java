@@ -2,13 +2,19 @@ package login;
 
 import java.util.ArrayList;
 
+/**
+ * Armazena e gerencia a lista de usuários.
+ * Esta classe é responsável por validar e operar diretamente sobre os dados.
+ */
 public class SistemaLogin {
     private ArrayList<Usuario> usuarios = new ArrayList<>();
 
-    // Cadastrar usuário (não permite login repetido, case insensitive)
+    /**
+     * Cadastra um novo usuário se o login ainda não existir.
+     * A verificação é insensível a maiúsculas e minúsculas.
+     */
     public boolean cadastrarUsuario(String login, String senha) {
         if (buscarUsuario(login) != null) {
-            System.out.println("Erro: Login já cadastrado!");
             return false;
         }
         usuarios.add(new Usuario(login, senha));
@@ -16,7 +22,9 @@ public class SistemaLogin {
         return true;
     }
 
-    // Remover usuário pelo login (case insensitive)
+    /**
+     * Remove um usuário a partir do login.
+     */
     public boolean removerUsuario(String login) {
         Usuario usuario = buscarUsuario(login);
         if (usuario != null) {
@@ -24,35 +32,34 @@ public class SistemaLogin {
             System.out.println("Usuário removido com sucesso!");
             return true;
         }
-        System.out.println("Erro: Usuário não encontrado.");
         return false;
     }
 
-    // Listar todos os logins
+    /**
+     * Lista todos os usuários cadastrados (logins).
+     */
     public void listarUsuarios() {
         if (usuarios.isEmpty()) {
             System.out.println("Nenhum usuário cadastrado.");
         } else {
-            System.out.println("Usuários cadastrados:");
+            System.out.println("Usuários:");
             for (Usuario u : usuarios) {
                 System.out.println("- " + u.getLogin());
             }
         }
     }
 
-    // Autenticar usuário (login e senha, case insensitive para login)
+    /**
+     * Verifica se o login e senha correspondem a um usuário existente.
+     */
     public boolean autenticar(String login, String senha) {
         Usuario usuario = buscarUsuario(login);
-        if (usuario != null && usuario.getSenha().equals(senha)) {
-            System.out.println("Autenticação bem-sucedida!");
-            return true;
-        } else {
-            System.out.println("Erro: Login ou senha incorretos.");
-            return false;
-        }
+        return usuario != null && usuario.getSenha().equals(senha);
     }
 
-    // Buscar usuário ignorando maiúsculas/minúsculas
+    /**
+     * Busca um usuário a partir do login (sem diferenciar maiúsculas/minúsculas).
+     */
     private Usuario buscarUsuario(String login) {
         for (Usuario u : usuarios) {
             if (u.getLogin().equalsIgnoreCase(login)) {

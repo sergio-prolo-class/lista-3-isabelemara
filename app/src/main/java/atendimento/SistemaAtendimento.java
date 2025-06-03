@@ -31,6 +31,7 @@ public class SistemaAtendimento {
         }
     }
 
+
     public void listarTelefonesClientes() {
         if (clientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado.");
@@ -38,7 +39,7 @@ public class SistemaAtendimento {
         }
         System.out.println("Telefones dos clientes:");
         for (Cliente c : clientes.values()) {
-            System.out.println(c.getTelefone());
+            System.out.println(c.getTelefone() + " (" + c.getNome() + ")");
         }
     }
 
