@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SistemaLogin {
     private ArrayList<Usuario> usuarios = new ArrayList<>();
 
-    // Cadastrar usuário (não permite login repetido)
+    // Cadastrar usuário (não permite login repetido, case insensitive)
     public boolean cadastrarUsuario(String login, String senha) {
         if (buscarUsuario(login) != null) {
             System.out.println("Erro: Login já cadastrado!");
@@ -16,7 +16,7 @@ public class SistemaLogin {
         return true;
     }
 
-    // Remover usuário pelo login
+    // Remover usuário pelo login (case insensitive)
     public boolean removerUsuario(String login) {
         Usuario usuario = buscarUsuario(login);
         if (usuario != null) {
@@ -28,7 +28,7 @@ public class SistemaLogin {
         return false;
     }
 
-    // Listar todos os logins (na ordem de cadastro)
+    // Listar todos os logins
     public void listarUsuarios() {
         if (usuarios.isEmpty()) {
             System.out.println("Nenhum usuário cadastrado.");
@@ -40,7 +40,7 @@ public class SistemaLogin {
         }
     }
 
-    // Autenticar usuário (login e senha)
+    // Autenticar usuário (login e senha, case insensitive para login)
     public boolean autenticar(String login, String senha) {
         Usuario usuario = buscarUsuario(login);
         if (usuario != null && usuario.getSenha().equals(senha)) {
@@ -52,10 +52,10 @@ public class SistemaLogin {
         }
     }
 
-    // Método auxiliar: buscar usuário pelo login
+    // Buscar usuário ignorando maiúsculas/minúsculas
     private Usuario buscarUsuario(String login) {
         for (Usuario u : usuarios) {
-            if (u.getLogin().equals(login)) {
+            if (u.getLogin().equalsIgnoreCase(login)) {
                 return u;
             }
         }
