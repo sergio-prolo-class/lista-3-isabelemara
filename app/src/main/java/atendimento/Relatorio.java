@@ -1,39 +1,30 @@
 package atendimento;
 
-import java.util.*;
-
 public class Relatorio {
-    private int totalRegistradas;
-    private int totalAtendidas;
-    private int totalEmEspera;
-    private Map<String, Integer> distribuicaoPorCategoria = new HashMap<>();
+    private SistemaAtendimento sistema;
 
-    public Relatorio(Queue<Solicitacao> fila, List<Solicitacao> atendidos) {
-        totalAtendidas = atendidos.size();
-        totalEmEspera = fila.size();
-        totalRegistradas = totalAtendidas + totalEmEspera;
-
-        List<Solicitacao> todas = new ArrayList<>(fila);
-        todas.addAll(atendidos);
-
-        for (Solicitacao s : todas) {
-            String categoria = s.getCategoria();
-            distribuicaoPorCategoria.put(categoria,
-                    distribuicaoPorCategoria.getOrDefault(categoria, 0) + 1);
-        }
+    public Relatorio(SistemaAtendimento sistema) {
+        this.sistema = sistema;
     }
 
     public void exibirRelatorio() {
-        System.out.println("\n=== RELATÓRIO ESTATÍSTICO ===");
-        System.out.println("Total de solicitações registradas: " + totalRegistradas);
-        System.out.println("Total de solicitações atendidas: " + totalAtendidas);
-        System.out.println("Total de solicitações em espera: " + totalEmEspera);
+        int total = sistema.getTotalSolicitacoes();
+        int atendidas = sistema.getAtendidas();
+        int emEspera = sistema.getEmEspera();
 
-        System.out.println("\nDistribuição por categoria:");
-        for (Map.Entry<String, Integer> entry : distribuicaoPorCategoria.entrySet()) {
-            double percentual = (entry.getValue() * 100.0) / (totalRegistradas == 0 ? 1 : totalRegistradas);
-            System.out.printf("- %s: %d (%.2f%%)%n", entry.getKey(), entry.getValue(), percentual);
+        System.out.println("\n===== Relatório =====");
+        System.out.println("Total de solicitações registradas: " + total);
+        System.out.println("Total de atendidas: " + atendidas);
+        System.out.println("Total em espera: " + emEspera);
+
+        if (total > 0) {
+            System.out.println("\nDistribuição percentual por categoria:");
+            System.out.printf("Suporte Técnico: %.2f%%\n", (sistema.getSuporteTecnico() * 100.0) / total);
+            System.out.printf("Informação: %.2f%%\n", (sistema.getInformacao() * 100.0) / total);
+            System.out.printf("Atendimento Financeiro: %.2f%%\n", (sistema.getAtendimentoFinanceiro() * 100.0) / total);
+        } else {
+            System.out.println("\nNenhuma solicitação registrada.");
         }
-        System.out.println("==============================\n");
+        System.out.println("======================\n");
     }
 }

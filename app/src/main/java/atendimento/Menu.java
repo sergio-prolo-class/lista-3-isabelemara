@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class Menu {
     private SistemaAtendimento sistema = new SistemaAtendimento();
+    private Relatorio relatorio = new Relatorio(sistema);
     private Scanner sc = new Scanner(System.in);
+    private Registrosolicitacao registro = new Registrosolicitacao(sistema, sc);
 
-    public void exibir() {
+    public void exibirMenu() {
         int opcao;
         do {
             System.out.println("\n===== MENU =====");
@@ -19,35 +21,19 @@ public class Menu {
             System.out.println("7 - Gerar Relatório");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
-            opcao = Integer.parseInt(sc.nextLine());
+            opcao = sc.nextInt();
+            sc.nextLine(); // limpar buffer
 
             switch (opcao) {
-                case 1:
-                    sistema.registrarSolicitacao();
-                    break;
-                case 2:
-                    sistema.listarTelefonesClientes();
-                    break;
-                case 3:
-                    sistema.imprimirProximoCliente();
-                    break;
-                case 4:
-                    sistema.atenderProximoCliente();
-                    break;
-                case 5:
-                    sistema.listarClientesAtendidos();
-                    break;
-                case 6:
-                    sistema.listarTelefonesEmEspera();
-                    break;
-                case 7:
-                    sistema.gerarRelatorio().exibirRelatorio();
-                    break;
-                case 0:
-                    System.out.println("Saindo do sistema...");
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
+                case 1 -> registro.registrar();
+                case 2 -> sistema.listarTelefonesClientes();
+                case 3 -> sistema.verProximoCliente();
+                case 4 -> sistema.atenderProximoCliente();
+                case 5 -> sistema.listarClientesAtendidos();
+                case 6 -> sistema.listarTelefonesEmEspera();
+                case 7 -> relatorio.exibirRelatorio();
+                case 0 -> System.out.println("Encerrando o sistema...");
+                default -> System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }

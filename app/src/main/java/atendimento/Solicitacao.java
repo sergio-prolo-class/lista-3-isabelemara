@@ -22,4 +22,12 @@ public class Solicitacao {
     public String getCategoria() {
         return categoria;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente: " + cliente.getNome() +
+                ", Telefone: " + cliente.getTelefone() +
+                ", Descrição: " + descricao +
+                ", Categoria: " + categoria;
+    }
 }
