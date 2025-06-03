@@ -2,15 +2,27 @@ package atendimento;
 
 import java.util.Scanner;
 
-public class Registrosolicitacao {
-    private SistemaAtendimento sistema;
+/**
+ * Classe responsável por registrar uma nova solicitação no sistema.
+ */
+public class RegistrarSolicitacao {
+    private GerenciadorSolicitacoes gerenciador;
     private Scanner sc;
 
-    public Registrosolicitacao(SistemaAtendimento sistema, Scanner sc) {
-        this.sistema = sistema;
+    /**
+     * Construtor da classe.
+     *
+     * @param gerenciador Referência para o gerenciador central das solicitações.
+     * @param sc          Scanner para leitura dos dados no terminal.
+     */
+    public RegistrarSolicitacao(GerenciadorSolicitacoes gerenciador, Scanner sc) {
+        this.gerenciador = gerenciador;
         this.sc = sc;
     }
 
+    /**
+     * Método que coleta os dados do usuário e registra a solicitação.
+     */
     public void registrar() {
         System.out.print("Nome do cliente: ");
         String nome = sc.nextLine();
@@ -24,8 +36,9 @@ public class Registrosolicitacao {
         System.out.println("3 - Atendimento Financeiro");
         System.out.print("Opção: ");
         int opcaoCategoria = sc.nextInt();
-        sc.nextLine(); // Limpa o buffer
+        sc.nextLine(); // limpa o buffer
 
+        // Determina a categoria com base na escolha
         String categoria = switch (opcaoCategoria) {
             case 1 -> "Suporte Técnico";
             case 2 -> "Informação";
@@ -39,6 +52,7 @@ public class Registrosolicitacao {
         System.out.print("Descrição da solicitação: ");
         String descricao = sc.nextLine();
 
-        sistema.registrarSolicitacao(nome, telefone, descricao, categoria);
+        // Envia os dados para o gerenciador registrar
+        gerenciador.registrarSolicitacao(nome, telefone, descricao, categoria);
     }
 }

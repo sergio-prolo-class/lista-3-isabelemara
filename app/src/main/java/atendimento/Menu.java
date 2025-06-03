@@ -2,14 +2,28 @@ package atendimento;
 
 import java.util.Scanner;
 
+/**
+ * Classe responsável por exibir o menu principal e acionar as funcionalidades correspondentes.
+ */
 public class Menu {
-    private SistemaAtendimento sistema = new SistemaAtendimento();
-    private Relatorio relatorio = new Relatorio(sistema);
-    private Scanner sc = new Scanner(System.in);
-    private Registrosolicitacao registro = new Registrosolicitacao(sistema, sc);
+    private Scanner scanner = new Scanner(System.in);
+    private GerenciadorSolicitacoes gerenciador = new GerenciadorSolicitacoes();
 
+    // Instâncias de cada funcionalidade separada
+    private RegistrarSolicitacao registrar = new RegistrarSolicitacao(gerenciador, scanner);
+    private ListarTelefonesClientes listarTelefones = new ListarTelefonesClientes(gerenciador);
+    private VerProximo verProximo = new VerProximo(gerenciador);
+    private AtenderProximoCliente atenderProximo = new AtenderProximoCliente(gerenciador);
+    private ListarClientesAtendidos listarAtendidos = new ListarClientesAtendidos(gerenciador);
+    private ListarTelefonesEmEspera listarEspera = new ListarTelefonesEmEspera(gerenciador);
+    private GerarRelatorio relatorio = new GerarRelatorio(gerenciador);
+
+    /**
+     * Exibe o menu principal em loop até o usuário escolher sair.
+     */
     public void exibirMenu() {
         int opcao;
+
         do {
             System.out.println("\n===== MENU =====");
             System.out.println("1 - Registrar Solicitação");
@@ -21,17 +35,17 @@ public class Menu {
             System.out.println("7 - Gerar Relatório");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
-            opcao = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            opcao = scanner.nextInt();
+            scanner.nextLine(); // limpa o buffer do teclado
 
             switch (opcao) {
-                case 1 -> registro.registrar();
-                case 2 -> sistema.listarTelefonesClientes();
-                case 3 -> sistema.verProximoCliente();
-                case 4 -> sistema.atenderProximoCliente();
-                case 5 -> sistema.listarClientesAtendidos();
-                case 6 -> sistema.listarTelefonesEmEspera();
-                case 7 -> relatorio.exibirRelatorio();
+                case 1 -> registrar.registrar();
+                case 2 -> listarTelefones.listar();
+                case 3 -> verProximo.ver();
+                case 4 -> atenderProximo.atender();
+                case 5 -> listarAtendidos.listar();
+                case 6 -> listarEspera.listar();
+                case 7 -> relatorio.exibir();
                 case 0 -> System.out.println("Encerrando o sistema...");
                 default -> System.out.println("Opção inválida.");
             }
