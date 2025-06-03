@@ -1,16 +1,16 @@
 package login;
 
 public class Usuario {
-    private String nome;
+    private String login;
     private String senha;
 
-    public Usuario(String nome, String senha) {
-        this.nome = nome;
+    public Usuario(String login, String senha) {
+        this.login = login;
         this.senha = senha;
     }
 
-    public String getNome() {
-        return nome;
+    public String getLogin() {
+        return login;
     }
 
     public String getSenha() {
