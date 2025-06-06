@@ -2,19 +2,18 @@ package biblioteca;
 
 import java.util.Scanner;
 
-/**
- * Responsável por cadastrar um novo leitor no sistema.
- */
+// Classe responsável por realizar o cadastro de um novo leitor no sistema.
 public class CadastroLeitor {
+    // Scanner para receber entrada do usuário.
     private Scanner scanner;
 
+    // Construtor que recebe o scanner para leitura de dados.
     public CadastroLeitor(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    /**
-     * Executa o cadastro do leitor solicitando dados e retorna o objeto Leitor.
-     */
+    // Método que realiza o cadastro do leitor.
+    // Solicita o nome e telefone do leitor, cria e retorna o objeto Leitor.
     public Leitor cadastrarLeitor() {
         System.out.print("Nome do leitor: ");
         String nome = scanner.nextLine();
@@ -22,15 +21,12 @@ public class CadastroLeitor {
         System.out.print("Telefone: ");
         String telefone = scanner.nextLine();
 
-        System.out.print("Endereço: ");
-        String endereco = scanner.nextLine();
-
-        return new Leitor(nome, telefone, endereco);
+        // Cria e retorna o objeto Leitor com os dados informados.
+        return new Leitor(nome, telefone);
     }
 
-    /**
-     * Método para facilitar a execução dentro do menu.
-     */
+    // Método que facilita a chamada desse cadastro a partir do menu principal.
+    // Adiciona o leitor cadastrado na lista de leitores do sistema e confirma o cadastro.
     public void executar(SistemaBiblioteca sistema) {
         Leitor leitor = cadastrarLeitor();
         sistema.getLeitores().add(leitor);

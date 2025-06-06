@@ -9,7 +9,7 @@ public class AtenderProximoCliente {
     /**
      * Construtor que recebe o gerenciador de solicitações como dependência.
      *
-     * @param gerenciador Instância central que gerencia dados de atendimento.
+     * gerenciador Instância central que gerencia dados de atendimento.
      */
     public AtenderProximoCliente(GerenciadorSolicitacoes gerenciador) {
         this.gerenciador = gerenciador;

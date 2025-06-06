@@ -12,8 +12,8 @@ public class RegistrarSolicitacao {
     /**
      * Construtor da classe.
      *
-     * @param gerenciador Referência para o gerenciador central das solicitações.
-     * @param sc          Scanner para leitura dos dados no terminal.
+     *  gerenciador Referência para o gerenciador central das solicitações.
+     *  sc          Scanner para leitura dos dados no terminal.
      */
     public RegistrarSolicitacao(GerenciadorSolicitacoes gerenciador, Scanner sc) {
         this.gerenciador = gerenciador;

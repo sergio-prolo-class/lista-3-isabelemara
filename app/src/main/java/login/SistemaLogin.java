@@ -3,19 +3,28 @@ package login;
 import java.util.ArrayList;
 
 /**
- * Responsável por armazenar e manipular os dados dos usuários.
+ * Classe que armazena e gerencia os dados dos usuários.
+ * Permite cadastrar, remover, autenticar e listar usuários.
  */
 public class SistemaLogin {
     private ArrayList<Usuario> usuarios = new ArrayList<>();
 
+    /**
+     * Cadastra um novo usuário caso o login ainda não exista.
+
+     */
     public boolean cadastrarUsuario(String login, String senha) {
         if (buscarUsuario(login) != null) {
-            return false;
+            return false; // Login já existe
         }
         usuarios.add(new Usuario(login, senha));
         return true;
     }
 
+    /**
+     * Remove um usuário pelo login.
+
+     */
     public boolean removerUsuario(String login) {
         Usuario usuario = buscarUsuario(login);
         if (usuario != null) {
@@ -25,6 +34,10 @@ public class SistemaLogin {
         return false;
     }
 
+    /**
+     * Lista todos os usuários cadastrados no sistema.
+     * Exibe mensagem se não houver usuários.
+     */
     public void listarUsuarios() {
         if (usuarios.isEmpty()) {
             System.out.println("Nenhum usuário cadastrado.");
@@ -36,11 +49,18 @@ public class SistemaLogin {
         }
     }
 
+    /**
+     * Autentica o usuário com login e senha.
+
+     */
     public boolean autenticar(String login, String senha) {
         Usuario usuario = buscarUsuario(login);
         return usuario != null && usuario.getSenha().equals(senha);
     }
 
+    /**
+     * Busca um usuário pelo login ignorando caixa (case insensitive).
+     */
     private Usuario buscarUsuario(String login) {
         for (Usuario u : usuarios) {
             if (u.getLogin().equalsIgnoreCase(login)) {

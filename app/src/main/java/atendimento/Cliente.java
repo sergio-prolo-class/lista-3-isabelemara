@@ -11,8 +11,8 @@ public class Cliente {
     /**
      * Construtor da classe Cliente.
      *
-     * @param nome     Nome do cliente.
-     * @param telefone Telefone do cliente (deve ser único no sistema).
+     *  nome     Nome do cliente.
+     *  telefone Telefone do cliente (deve ser único no sistema).
      */
     public Cliente(String nome, String telefone) {
         this.nome = nome;
@@ -30,7 +30,7 @@ public class Cliente {
     }
 
     // Retorna a representação do cliente no formato "Nome (telefone)"
-    @Override
+
     public String toString() {
         return nome + " (" + telefone + ")";
     }

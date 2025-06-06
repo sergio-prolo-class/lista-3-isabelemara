@@ -12,9 +12,9 @@ public class Solicitacao {
     /**
      * Construtor da solicitação.
      *
-     * @param cliente    Cliente que fez a solicitação.
-     * @param descricao  Descrição do problema ou pedido.
-     * @param categoria  Categoria da solicitação (ex: Suporte Técnico, Informação).
+     * cliente    Cliente que fez a solicitação.
+     *  descricao  Descrição do problema ou pedido.
+     *  categoria  Categoria da solicitação (ex: Suporte Técnico, Informação).
      */
     public Solicitacao(Cliente cliente, String descricao, String categoria) {
         this.cliente = cliente;

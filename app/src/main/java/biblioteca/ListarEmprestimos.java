@@ -1,18 +1,20 @@
 package biblioteca;
 
-import java.util.Comparator;
 import java.util.List;
 
-/**
- * Classe para listar todos os empréstimos ordenados por data.
- */
+// Classe responsável por listar todos os empréstimos,
+// mostrando apenas o nome do leitor e o título do livro
 public class ListarEmprestimos {
 
-    public void listarPorData(List<Emprestimo> emprestimos) {
-        emprestimos.sort(Comparator.comparing(Emprestimo::getData));
-        System.out.println("\n--- Lista de Empréstimos (Ordenados por Data) ---");
+    // Método que exibe todos os empréstimos na tela
+    public void listaremp(List<Emprestimo> emprestimos) {
+        System.out.println("\n--- Lista de Empréstimos ---");
+
+        // Percorre a lista de empréstimos e imprime nome do leitor e título do livro
         for (Emprestimo e : emprestimos) {
-            System.out.println(e);
+            String nomeLeitor = e.getLeitor().getNome();
+            String tituloLivro = e.getLivro().getTitulo();
+            System.out.println(nomeLeitor + " -> " + tituloLivro);
         }
     }
 }

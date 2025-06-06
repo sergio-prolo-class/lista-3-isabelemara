@@ -3,12 +3,17 @@ package login;
 import java.util.Scanner;
 
 /**
- * Esta classe exibe o menu e chama a classe responsável por cada operação.
+ * Classe que exibe o menu principal do sistema e direciona as operações.
+ * Utiliza Scanner para leitura de entradas do usuário.
  */
 public class Menu {
-    private SistemaLogin sistema = new SistemaLogin(); // Centraliza os dados
+    private SistemaLogin sistema = new SistemaLogin(); // Gerencia os usuários
     private Scanner sc = new Scanner(System.in);
 
+    /**
+     * Exibe o menu com opções e executa a ação escolhida pelo usuário.
+     * Loop até que o usuário escolha sair (opção 0).
+     */
     public void exibirMenu() {
         int opcao;
         do {
@@ -20,7 +25,7 @@ public class Menu {
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
-            sc.nextLine(); // Limpa buffer
+            sc.nextLine(); // Limpa o buffer do scanner
 
             switch (opcao) {
                 case 1 -> {
